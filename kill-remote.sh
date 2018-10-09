@@ -20,7 +20,7 @@ function main
     local compose_directory="./tmp/$git_hash"
     # This is only used at build time but it needs to be set to something
     # in order for the docker-compose commands to run
-    local api_port="foo"
+    export api_port="foo"
     pushd "$compose_directory"
     docker-compose down
     popd
