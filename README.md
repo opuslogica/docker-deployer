@@ -47,6 +47,7 @@ The deployments are done via docker on the remote host and the application versi
 * `db_name` is the name of the database that will be loaded from `./db_dump`
 * `mysql_user` is the user who will access the database from the rails application
 * `mysql_password` is the password that `mysql_user` will use to access the container
+* `email` is the email which will be used with certbot
 
 `./site.conf.tmpl` is the template for the generated apache config.
 `./cmd.sh` is the CMD for the api container
