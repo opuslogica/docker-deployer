@@ -29,7 +29,7 @@ The deployments are done via docker on the remote host and the application versi
 * That container is then reachable via `<"http" | "https">://<git_hash>.<deployment_url>` (see Variables to set for `deployment_url` description)
   * The host apache reverse proxies to the container forwarded port stripping ssl in
     the process and adding it back in for the response.
-* This deployment is accomplished by running `./deploy-dev.sh <deployment_url>` in the root directory of the api to deploy the most recent commit on the current branch.
+* This deployment is accomplished by running `./deploy-dev.sh <deployment_url> <commit_hash>` in the root directory of the api to deploy said commit hash.
   * This script assumes there is a deployer user for whom the local user has ssh access and that this repo has been cloned into that user's home directory
 * `remote.sh <git hash>` is run on the remote host which will run a container with the api as the specified version on the next available port.
   It will then add an apache configuration which will take care of the previously described reverse proxy process as well as obtain an ssl certificate for the new sub domain.
@@ -37,6 +37,8 @@ The deployments are done via docker on the remote host and the application versi
 * docker-compose is used each time with the given git hash. The different runs are distinguished
   by making a new directory named the git hash under ./tmp and copying the compose file into said
   directory
+* `./kill-dev.sh <deployment_url> <commit_hash>` will run `./kill-remote.sh <commit_hash>` to bring down the container associated with said commit hash.
+  * Also removes the apache config that was generated so there's no issue with future configs.
 
 ## Variables to set
 * There are a few variables that are required to be set.

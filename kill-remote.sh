@@ -5,7 +5,7 @@ set -e
 export git_hash="$1"
 
 if [[ -z "$git_hash" ]]; then
-    echo "./remote.sh <git hash>"
+    echo "./kill-remote.sh <git hash>"
     exit 1
 fi
 
@@ -22,12 +22,20 @@ function main
     # in order for the docker-compose commands to run
     export api_port="3000"
     pushd "$compose_directory"
+
+    # Bring down the containers
     docker-compose down
     popd
+
+    # Remove the temporary directory so that the
+    # container may be relaunched if needed
     rm -rf "$compose_directory"
 
+    # Remove the apache configuration so that it doesn't
+    # conflict with other configurations in the future
     rm "/etc/apache2/sites-enabled/$git_hash.conf"
 
+    # Restart apache
     sudo apachectl restart
 
     trap - EXIT
