@@ -62,3 +62,6 @@ The deployments are done via docker on the remote host and the application versi
 In order to save on container startup times, the repo and gems are all setup at build time. When the container is run, then the repo is reset to the new git hash and `bundle install` is re-run
 
 We assume that the rails application will be run on port 3000 inside the container
+
+`./wait-for-it.sh` is from [This git repo](https://github.com/vishnubob/wait-for-it)
+and is used to wait for the container to be up and running

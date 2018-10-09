@@ -21,6 +21,7 @@ function main
     local available_port="$(find_port)"
     run_container "$available_port"
     update_apache "$available_port"
+    wait_for_container "$available_port"
 }
 
 # TODO this function is supposed to do some cleanup and possibly some
@@ -102,6 +103,20 @@ function update_apache
 	site.conf.tmpl > /etc/apache2/sites-enabled/"$git_hash".conf
 
     sudo apachectl start
+
+    trap - EXIT
+}
+
+function wait_for_container
+{
+    trap "return_error 'Container failed to launch'" EXIT
+
+    local port="$1"
+
+    echo "Waiting for container..."
+    ./wait-for-it.sh localhost:"$1" -t 0
+    echo "Container successfully launched!"
+    echo "Your container is now available on <'http' | 'https'>://${git_hash}.${deployment_url}"
 
     trap - EXIT
 }
