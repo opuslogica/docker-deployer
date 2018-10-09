@@ -89,7 +89,7 @@ function update_apache
 
     # Check if a cert already exists or not
     if [[ ! -d "/etc/letsencrypt/live/${full_name}" ]]; then
-	certbot certonly --standalone --domain "${full_name}"
+	sudo certbot certonly --standalone --domain "${full_name}"
     fi
 
     # Generate the apache configuration

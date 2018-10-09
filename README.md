@@ -15,8 +15,12 @@ The deployments are done via docker on the remote host and the application versi
   * Get the necessary variables into the current shell by running `source ./variables.sh` (See Variables to set for how to make this file)
   * There are run-time arguments which are required to be set in order to build the api container. `api_port` and `git_hash` should be set to some non-empty string to satisfy docker-compose.
 	* `docker-compose build`
-* The deployer user should have passwordless sudo for `apachectl`
-  * `sudo visudo` and then insert `deployer ALL = (root) NOPASSWD: /usr/sbin/apachectl`
+* The deployer user should have passwordless sudo for `apachectl` and `certbot`.
+  * `sudo visudo` and then insert
+    ```
+    deployer ALL = (root) NOPASSWD: /usr/sbin/apachectl
+    deployer ALL = (root) NOPASSWD: /usr/bin/certbot
+    ```
 
 ## Architecture
 * The developer deploys a container which runs the api versioned to a specific commit identified by the first 7 characters of the git hash.
