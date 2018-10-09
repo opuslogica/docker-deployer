@@ -42,9 +42,13 @@ The deployments are done via docker on the remote host and the application versi
 * `mysql_user` is the user who will access the database from the rails application
 * `mysql_password` is the password that `mysql_user` will use to access the container
 
-`./db_dump` is the dump of the database (this is ignored by git).
 `./site.conf.tmpl` is the template for the generated apache config.
 `./cmd.sh` is the CMD for the api container
+
+## Files to create (all ignored by git)
+`./db_dump` dump of the database
+`./git.key` private key to pull from remote repository
+`./variables.sh` as described above in "Variables to set"
 
 In order to save on container startup times, the repo and gems are all setup at build time. When the container is run, then the repo is reset to the new git hash and `bundle install` is re-run
 
