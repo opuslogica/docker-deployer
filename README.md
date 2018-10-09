@@ -21,6 +21,8 @@ The deployments are done via docker on the remote host and the application versi
     deployer ALL = (root) NOPASSWD: /usr/sbin/apachectl
     deployer ALL = (root) NOPASSWD: /usr/bin/certbot
     ```
+* The deployer user should have permission to edit `/etc/apache2`
+  * `sudo setfacl -R -m u:deployer:rwx /etc/apache2/`
 
 ## Architecture
 * The developer deploys a container which runs the api versioned to a specific commit identified by the first 7 characters of the git hash.

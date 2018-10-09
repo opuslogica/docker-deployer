@@ -92,7 +92,8 @@ function update_apache
 	sudo certbot certonly --email "$email" \
              --standalone \
              --domain "${full_name}" \
-             --agree-tos
+             --agree-tos \
+             -n # run non-interactively
     fi
 
     # Generate the apache configuration
