@@ -118,10 +118,11 @@ function wait_for_container
     echo "Waiting for container..."
     set +e
     while [[ true ]]; do
-        if [[ $(curl localhost:"$port" &> /dev/null) ]]; then
+        if curl localhost:"$port" &> /dev/null ; then
             break
         else
-            echo "still waiting for container"
+            echo "still waiting for container ... "
+            sleep 5
         fi
     done
     set -e
