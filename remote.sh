@@ -116,7 +116,6 @@ function wait_for_container
     local port="$1"
 
     echo "Waiting for container..."
-    ./wait-for-it.sh localhost:"$1" -t 0
     set +e
     while [[ true ]]; do
         curl localhost:"$port" && break || sleep 3
