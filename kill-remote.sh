@@ -2,7 +2,7 @@
 
 set -e
 
-git_hash="$1"
+export git_hash="$1"
 
 if [[ -z "$git_hash" ]]; then
     echo "./remote.sh <git hash>"
