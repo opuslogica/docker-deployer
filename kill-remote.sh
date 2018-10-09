@@ -18,9 +18,9 @@ function main
     trap "return_error 'Failed to bring down container'" EXIT
 
     local compose_directory="./tmp/$git_hash"
-    # This is only used at build time but it needs to be set to something
+    # This is only used at build time but it needs to be set to a number
     # in order for the docker-compose commands to run
-    export api_port="foo"
+    export api_port="3000"
     pushd "$compose_directory"
     docker-compose down
     popd
