@@ -85,7 +85,7 @@ function update_apache
     local available_port="$1"
     local full_name="${git_hash}.${deployment_url}"
 
-    systemctl stop apache2
+    sudo apachectl stop
 
     # Check if a cert already exists or not
     if [[ ! -d "/etc/letsencrypt/live/${full_name}" ]]; then
@@ -97,7 +97,7 @@ function update_apache
 	-e "s/\${server_name}/${full_name}/g" \
 	site.conf.tmpl > /etc/apache2/sites-enabled/"$git_hash".conf
 
-    systemctl start apache2
+    sudo apachectl start
 
     trap - EXIT
 }
