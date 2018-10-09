@@ -45,9 +45,11 @@ function find_port
     for ((port=$first_port; port<=$last_port; port++))
     do
         (echo >/dev/tcp/$IP/$port)> /dev/null 2>&1 || available_port="$port"
+        set +u
 	if [[ ! -z $available_port ]]; then
 	    break
 	fi
+        set -u
     done
     echo "$available_port"
     trap - EXIT
