@@ -5,10 +5,10 @@ The deployments are done via docker on the remote host and the application versi
 ## Requirements
 * `./git.key` is the ssh private key which will let you clone.
   * It is included in .gitignore, so it will not be committed
-* (Docker)[https://docs.docker.com/install/]
-* (Apache)[https://www.apache.org]
-* (letsencrypt (certbot))[https://certbot.eff.org]
-* (docker-compose)[https://docs.docker.com/compose/install/]
+* [Docker](https://docs.docker.com/install/)
+* [Apache](https://www.apache.org)
+* [letsencrypt (certbot)](https://certbot.eff.org)
+* [docker-compose](https://docs.docker.com/compose/install/)
 * The following apache modules
   * `a2enmod <ssl & proxy & proxy_http>`
 * Building the containers
