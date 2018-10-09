@@ -26,6 +26,10 @@ function main
     popd
     rm -rf "$compose_directory"
 
+    rm "/etc/apache2/sites-enabled/$git_hash.conf"
+
+    sudo apachectl restart
+
     trap - EXIT
 }
 
