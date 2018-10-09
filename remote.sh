@@ -117,6 +117,11 @@ function wait_for_container
 
     echo "Waiting for container..."
     ./wait-for-it.sh localhost:"$1" -t 0
+    set +e
+    while [[ true ]]; do
+        curl localhost:"$port" && break || sleep 3
+    done
+    set -e
     echo "Container successfully launched!"
     echo "Your container is now available on <'http' | 'https'>://${git_hash}.${deployment_url}"
 
