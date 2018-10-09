@@ -118,7 +118,11 @@ function wait_for_container
     echo "Waiting for container..."
     set +e
     while [[ true ]]; do
-        curl localhost:"$port" && break || sleep 3
+        if [[ $(curl localhost:"$port" &> /dev/null) ]]; then
+            break
+        else
+            echo "still waiting for container"
+        fi
     done
     set -e
     echo "Container successfully launched!"
