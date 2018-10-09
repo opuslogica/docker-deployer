@@ -1,0 +1,30 @@
+---
+version: '3.6'
+services:
+  # This is a standard mysql database container
+  db:
+    image: "mysql:5.7"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${mysql_root_password:?err}
+      MYSQL_USER: ${mysql_user:?err}
+      MYSQL_PASSWORD: ${mysql_password:?err}
+      MYSQL_DATABASE: ${db_name:?err}
+
+  # The api container requires build time as well as runtime arguments
+  # The arguments are found in ./variables.sh as documented in README.md
+  api:
+    build:
+      context: './'
+      args:
+        - git_server
+        - repo_name
+        - ruby_version
+    ports:
+      # Assume the application will be run on port 3000
+      - "${api_port:?err}:3000"
+    environment:
+      git_hash: ${git_hash:?err}
+      deployment_url: ${deployment_url:?err}
+      repo_name: ${repo_name:?err}
+      mysql_root_password: ${mysql_root_password:?err}
+      db_name: ${db_name:?err}

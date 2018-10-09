@@ -1,0 +1,8 @@
+github.key
+git.key
+/gems
+*~
+\#*\#
+/tmp
+db_dump
+variables.sh
