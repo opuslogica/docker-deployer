@@ -7,7 +7,6 @@ commit_hash="$2"
 
 if [[ -z "$deployment_url" ]]; then
     echo "./deploy-dev.sh <deployment_url> <commit_hash>"
-    echo "(The <deployment_url> you want is probably \"docker.jobspeaker.com\")"
     commit_hash=$(git rev-parse HEAD | cut -c1-7)
     echo "If you want to deploy with the current commit hash it is: $commit_hash"
     exit 1
