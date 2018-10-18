@@ -2,19 +2,34 @@
 
 set -e
 
-if [[ -z "$git_hash" || -z "$deployment_url" || -z "$repo_name" || -z "$mysql_root_password" || -z "$db_name" ]]; then
-    echo "git_hash, deployment_url, and repo_name are all required"
+all_set=1
+[[ -z "$git_hash" ]] || all_set=0
+[[ -z "$deployment_url" ]] || all_set=0
+[[ -z "$repo_name" ]] || all_set=0
+[[ -z "$mysql_root_password" ]] || all_set=0
+[[ -z "$db_name" ]] || all_set=0
+[[ -z "$branch" ]] || all_set=0
+
+if [[ ! "$all_set" = 0 ]]; then
+    echo "git_hash, deployment_url, repo_name, and branch are all required"
     exit 1
 fi
+
+echo "completed"
+exit 0
 
 source /etc/profile.d/rvm.sh
 
 wait-for-it.sh db:3306 -t 0
 mysql -hdb -uroot -p"$mysql_root_password" "$db_name" < /db_dump
 
-# The repo should have already bin cloned, so we just reset to the given hash and
+# The repo should have already bin cloned,
+# so we just checkout the given branch,
+# reset to the given hash, and
 # install any non-installed gems
 cd "$repo_name"
+git pull origin "$branch"
+git checkout "$branch"
 git reset --hard "$git_hash"
 bundle install
 

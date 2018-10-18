@@ -23,6 +23,7 @@ services:
       # Assume the application will be run on port 3000
       - "${api_port:?err}:3000"
     environment:
+      branch: ${branch:?err}
       git_hash: ${git_hash:?err}
       deployment_url: ${deployment_url:?err}
       repo_name: ${repo_name:?err}

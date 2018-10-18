@@ -3,10 +3,11 @@
 set -e
 
 # We export the git_hash so it may be used within the compose file
-export git_hash="$1"
+export branch="$1"
+export git_hash="$2"
 
-if [[ -z "$git_hash" ]]; then
-    echo "./remote.sh <git hash>"
+if [[ -z "$branch" || -z "$git_hash" ]]; then
+    echo "./remote.sh <branch> <git hash>"
     exit 1
 fi
 
