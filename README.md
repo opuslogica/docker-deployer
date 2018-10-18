@@ -29,9 +29,9 @@ The deployments are done via docker on the remote host and the application versi
 * That container is then reachable via `<"http" | "https">://<git_hash>.<deployment_url>` (see Variables to set for `deployment_url` description)
   * The host apache reverse proxies to the container forwarded port stripping ssl in
     the process and adding it back in for the response.
-* This deployment is accomplished by running `./deploy-dev.sh <deployment_url> <commit_hash>` in the root directory of the api to deploy said commit hash.
+* This deployment is accomplished by running `./deploy-dev.sh <deployment_url> <branch> <commit_hash>` in the root directory of the api to deploy said commit hash on said branch.
   * This script assumes there is a deployer user for whom the local user has ssh access and that this repo has been cloned into that user's home directory
-* `remote.sh <git hash>` is run on the remote host which will run a container with the api as the specified version on the next available port.
+* `remote.sh <branch> <hash>` is run on the remote host which will run a container with the api as the specified version on the next available port.
   It will then add an apache configuration which will take care of the previously described reverse proxy process as well as obtain an ssl certificate for the new sub domain.
   * Obviously apache is also restarted
 * docker-compose is used each time with the given git hash. The different runs are distinguished
