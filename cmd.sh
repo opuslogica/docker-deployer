@@ -15,9 +15,6 @@ if [[ ! "$all_set" = 0 ]]; then
     exit 1
 fi
 
-echo "completed"
-exit 0
-
 source /etc/profile.d/rvm.sh
 
 wait-for-it.sh db:3306 -t 0
