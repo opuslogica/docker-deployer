@@ -9,7 +9,9 @@ commit_hash="$3"
 if [[ -z "$deployment_url" || -z "$commit_hash" || -z "$branch" ]]; then
     echo "./deploy-dev.sh <deployment_url> <branch> <commit_hash>"
     commit_hash=$(git rev-parse HEAD | cut -c1-7)
+    branch=$(git branch | grep \* | cut -d ' ' -f2)
     echo "If you want to deploy with the current commit hash it is: $commit_hash"
+    echo "And the current branch is: $branch"
     exit 1
 fi
 

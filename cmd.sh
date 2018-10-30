@@ -20,8 +20,8 @@ source /etc/profile.d/rvm.sh
 wait-for-it.sh db:3306 -t 0
 mysql -hdb -uroot -p"$mysql_root_password" "$db_name" < /db_dump
 
-# The repo should have already bin cloned,
-# so we just checkout the given branch,
+# The repo should have already been cloned,
+# so we just check out the given branch,
 # reset to the given hash, and
 # install any non-installed gems
 cd "$repo_name"
@@ -29,8 +29,9 @@ git pull origin "$branch"
 git checkout "$branch"
 git reset --hard "$git_hash"
 bundle install
+bundle exec rake db:migrate
 
 export backend_url="https://${git_hash}.${deployment_url}"
 
-RAILS_ENV=production ./bin/rake assets:precompile
-RAILS_ENV=production RAILS_SERVE_STATIC_FILES=yes ./bin/rails s -b 0.0.0.0
+RAILS_ENV=development ./bin/rake assets:precompile
+RAILS_ENV=development RAILS_SERVE_STATIC_FILES=yes ./bin/rails s -b 0.0.0.0
