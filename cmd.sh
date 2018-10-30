@@ -29,6 +29,7 @@ git pull origin "$branch"
 git checkout "$branch"
 git reset --hard "$git_hash"
 bundle install
+bundle exec rake db:migrate
 
 export backend_url="https://${git_hash}.${deployment_url}"
 
