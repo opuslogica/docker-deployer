@@ -6,6 +6,9 @@ const morgan = require('morgan');
 const { auth } = require('./src/auth');
 const { verifyToken } = require('./src/verify-token');
 const { processResponse } = require('./src/process-response');
+const { status } = require('./src/status');
+const { run } = require('./src/run');
+const { kill } = require('./src/kill');
 
 const port = 8080;
 const dbFile = "./db.json";
@@ -63,6 +66,17 @@ apiRoutes.use((req, res, next) => {
     }
 });
 
-app.use('/api', apiRoutes);
+apiRoutes.post('/status', (req, res) => {
+    processResponse(Object.assign({}, status(), {res: res}));
+});
 
+apiRoutes.post('/kill', (req, res) => {
+    processResponse(Object.assign({}, kill(req.body)), {res: res});
+});
+
+apiRoutes.post('/run', (req, res) => {
+    processResponse(Object.assign({}, run(req.body)), {res: res});
+});
+
+app.use('/api', apiRoutes);
 app.listen(port);
