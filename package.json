@@ -1,0 +1,25 @@
+{
+  "name": "docker-deployer",
+  "version": "1.0.0",
+  "description": "This is a basic single host docker deployment solution.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opuslogica/docker-deployer.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/opuslogica/docker-deployer/issues"
+  },
+  "homepage": "https://github.com/opuslogica/docker-deployer#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jest": "^23.6.0",
+    "jsonwebtoken": "^8.4.0",
+    "morgan": "^1.9.1"
+  }
+}

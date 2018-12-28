@@ -6,3 +6,5 @@ git.key
 /tmp
 db_dump
 variables.sh
+db.json
+node_modules/

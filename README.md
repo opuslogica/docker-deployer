@@ -26,6 +26,8 @@ This is a basic single host docker deployment solution.
     the process and adding it back in for the response.
 * These deployments may then be 'pinned' such that other users may repeat them.
 * Users are authorized via a username password combo which returns a token.
+* All necessary state is stored in `./db.json` (ignored via git)
+* A light-weight server is run at port 8080
 
 ## Command line access
 * Upon first access, user's are required to authenticate via their username and password. The resulting token is stored at `~/.docker-deployer/token`
