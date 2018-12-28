@@ -18,7 +18,8 @@ This is a basic single host docker deployment solution.
   * `sudo setfacl -R -m u:deployer:rwx /etc/apache2/`
 * The deployer user must have permission to execute docker commands
   * `sudo groupadd docker`
-  * logout then log back in
+  * `sudo usermod -aG docker $USER`
+  * logout (maybe reboot) then log back in
 * certbot is used for obtaining ssl certificates, and it requires an email
   * `echo <email> > certbot_email.txt` 
 

@@ -1,11 +1,6 @@
 const fs = require('fs');
 const { exec } = require('child_process');
 
-function parseProjectName(url) {
-    // TODO
-    return url;
-}
-
 function run(args) {
     args = args || {};
     const { url, dockerComposeFile, branch, commitHash } = args;
@@ -19,9 +14,7 @@ function run(args) {
         };
     }
 
-    const projectName = parseProjectName(url);
-
-    const path = ['tmp', projectName, branch, commitHash, dockerComposeFile].join('/');
+    const path = ['tmp', url, branch, commitHash, dockerComposeFile].join('/');
 
     fs.mkdir(path, {recursive: true}, (err) => {
         if (err) throw err;
